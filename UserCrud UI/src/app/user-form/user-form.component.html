@@ -1,0 +1,112 @@
+<h3>Yeni kullanıcı ekle</h3>
+<form [formGroup]="userAddForm" (ngSubmit)="add()">
+    <div class="form-group">
+        <input type="text" [ngModel]="model2?.userId" id="userId" name="userId" formControlName="userId"
+            class="form-control" placeholder="Kullanıcı ID">
+        <div class="alert alert-danger"
+            *ngIf="userAddForm.controls['userId'].invalid && (userAddForm.controls['userId'].dirty || userAddForm.controls['userId'].touched)">
+            ID zorunlu</div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" [ngModel]="model2?.tckn" id="tckn" name="tckn" formControlName="tckn" class="form-control"
+            placeholder="TC Kimlik Numarası">
+        <div class="alert alert-danger"
+            *ngIf="userAddForm.controls['tckn'].invalid && (userAddForm.controls['tckn'].dirty || userAddForm.controls['tckn'].touched)">
+            TC Kimlik Numarası zorunlu</div>
+        <div class="alert alert-danger" *ngIf="f.tckn.errors?.min">Minimum 11 karakter girebilirsiniz!</div>
+        <div class="alert alert-danger" *ngIf="f.tckn.errors?.errors?.max">Maximum 11 karakter girebilirsiniz!</div>
+    </div>
+
+    <div class="form-group">
+        <input type="email" [ngModel]="model2?.eMail" id="eMail" name="eMail" formControlName="eMail"
+            class="form-control" placeholder="E-Mail">
+        <div class="alert alert-danger"
+            *ngIf="userAddForm.controls['eMail'].invalid && (userAddForm.controls['eMail'].dirty || userAddForm.controls['eMail'].touched)">
+            E-mail zorunlu</div>
+         <div class="alert alert-danger" *ngIf="f.eMail.errors?.email">Girdiğiniz değer geçerli bir e-posta değil!</div> 
+    </div>
+
+    <div class="form-group">
+        <input type="password" [ngModel]="model2?.password" id="password" name="password" formControlName="password"
+            class="form-control" placeholder="Şifre">
+        <div class="alert alert-danger"
+            *ngIf="userAddForm.controls['password'].invalid && (userAddForm.controls['password'].dirty || userAddForm.controls['password'].touched)">
+            Şifre zorunlu</div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" [ngModel]="model2?.gsm" id="gsm" name="gsm" formControlName="gsm" class="form-control"
+            placeholder="Telefon Numarası">
+        <div class="alert alert-danger"
+            *ngIf="userAddForm.controls['gsm'].invalid && (userAddForm.controls['gsm'].dirty || userAddForm.controls['gsm'].touched)">
+            Telefon Numarası zorunlu</div>
+
+         <!-- <div class="alert alert-danger" *ngIf="userAddForm.controls['gsm'].errors.call">Girdiğiniz değer geçerli bir telefon numarası değil!</div> -->
+    </div>
+
+    <div class="form-group">
+        <!-- <input type="text" id="gsm" name="gsm" formControlName="gsm" class="form-control" placeholder="Telefon Numarası"> -->
+        <textarea id="address" [ngModel]="model2?.address" name="address" formControlName="address" class="form-control"
+            placeholder="Adres"></textarea>
+        <div class="alert alert-danger"
+            *ngIf="userAddForm.controls['address'].invalid && (userAddForm.controls['address'].dirty || userAddForm.controls['address'].touched)">
+            Adres zorunlu</div>
+    </div>
+
+    <!-- <div class="form-group">
+    <select class="form-control" name="categoryId" id="categoryId" formControlName="categoryId">
+        <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+    </select>
+    <div *ngIf="productAddForm.get('categoryId').hasError('required') && productAddForm.get('categoryId').touched" class="alert alert-danger">Kategori Id gerekldir</div>
+</div> -->
+    <button type="submit" class="btn btn-primary" [disabled]="userAddForm.invalid">Ekle</button>
+    <button type="button" (click)="update()" class="btn btn-success" [disabled]="userAddForm.invalid">Güncelle</button>
+    <button type="button" (click)="delete()" class="btn btn-success">Sil</button>
+
+    <button type="button" (click)="backUser()" class="btn btn-info">Geri</button>
+    <button type="button" (click)="nextUser()" class="btn btn-info">İleri</button>
+
+    <button type="button" class="btn btn-danger" (click)="clearField()">Temizle</button>
+</form>
+<br>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Kullanıcı ID'si</th>
+            <th>TC Kimlik Numarası</th>
+            <th>Email</th>
+            <th>Telefon Numarası</th>
+            <th>Adres</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.userId}}</td>
+            <td>{{user.tckn}}</td>
+            <td>{{user.eMail}}</td>
+            <td>{{user.gsm}}</td>
+            <td>{{user.address}}</td>
+        </tr>
+        <!-- <tr class="danger">
+        <td>Danger</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr class="info">
+        <td>Info</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+      <tr class="warning">
+        <td>Warning</td>
+        <td>Refs</td>
+        <td>bo@example.com</td>
+      </tr>
+      <tr class="active">
+        <td>Active</td>
+        <td>Activeson</td>
+        <td>act@example.com</td>
+      </tr> -->
+    </tbody>
+</table>
